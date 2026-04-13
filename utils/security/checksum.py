@@ -1,6 +1,8 @@
 import hashlib
 import os
 
+from utils.common import success, header, warning, error
+
 def hash_string(text: str, algorithm: str):
     h = hashlib.new(algorithm)
     h.update(text.encode())
@@ -37,7 +39,12 @@ def file(path, algorithm, check):
     result = hash_directory(path, algorithm) if os.path.isdir(path) else hash_file(path, algorithm)
     if check:
         match, result = hash_compare(result, check)
-        click.echo(click.style("PASS  " + result, fg="green") if match else click.style("FAIL", fg="red"))
+        if match:
+            click.echo(success("PASS  " + result))
+        else:
+            click.echo(error("FAIL"))
+            click.echo(f"  expected: {check}")
+            click.echo(f"  got:      {result}")
     else:
         print(result)
 
@@ -49,7 +56,12 @@ def hash_str(text, algorithm, check):
     result = hash_string(text, algorithm)
     if check:
         match, result = hash_compare(result, check)
-        click.echo(click.style("PASS  " + result, fg="green") if match else click.style("FAIL", fg="red"))
+        if match:
+            click.echo(success("PASS  " + result))
+        else:
+            click.echo(error("FAIL"))
+            click.echo(f"  expected: {check}")
+            click.echo(f"  got:      {result}")
     else:
         print(result)
 
