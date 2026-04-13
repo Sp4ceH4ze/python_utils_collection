@@ -34,5 +34,9 @@ dependencies = [
     "pip>=26",
 ]
 
+[project.urls]
+Repository = "https://github.com/Sp4ceH4ze/python_utils_collection"
+Issues = "https://github.com/Sp4ceH4ze/python_utils_collection/issues"
+
 [project.scripts]
 checksum = "utils.security.checksum:main"
