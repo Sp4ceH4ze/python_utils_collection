@@ -1,7 +1,7 @@
 import hashlib
 import os
 
-from utils.common import success, header, warning, error
+from utils.common import success, error
 
 def hash_string(text: str, algorithm: str):
     h = hashlib.new(algorithm)
