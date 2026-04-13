@@ -67,3 +67,4 @@ def hash_str(text, algorithm, check):
 
 if __name__ == "__main__":
     main()
+    
