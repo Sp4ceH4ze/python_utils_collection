@@ -1,0 +1,3 @@
+[submodule "vendor/gitleaks"]
+	path = vendor/gitleaks
+	url = https://github.com/gitleaks/gitleaks
