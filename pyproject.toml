@@ -9,13 +9,25 @@ packages = ["utils"]
 name = "python_utils_collection"
 version = "0.1.0"
 authors = [
-    { name="sp4c3h4z3", email="spacehaze89@gmail.com" },
+    {name="sp4c3h4z3", email="spacehaze89@gmail.com"},
+]
+maintainers = [
+    {name="sp4c3h4z3", email="spacehaze89@gmail.com"},
 ]
 description = "A collection of utility scripts"
+readme = {file = "README.md", content-type = "text/markdown"}
+license = "MIT"
+license-files = ["LICENSE.md"]
+keywords = ["utilities", "security"]
 requires-python = ">=3.14"
 classifiers = [
+    "Development Status :: 3 - Alpha",
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: End Users/Desktop"
 ]
 dependencies = [
     "click>=8",
