@@ -40,6 +40,7 @@ Repository = "https://github.com/Sp4ceH4ze/python_utils_collection"
 Issues = "https://github.com/Sp4ceH4ze/python_utils_collection/issues"
 
 [project.scripts]
+find_duplicates = "utils.file.find_duplicates:main"
+batch_rename = "utils.file.batch_rename:main"
 checksum = "utils.security.checksum:main"
 secret_scan = "utils.security.secret_scan:main"
-find_duplicates = "utils.file.find_duplicates:main"
