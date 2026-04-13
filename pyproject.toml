@@ -32,7 +32,8 @@ classifiers = [
 dependencies = [
     "click>=8",
     "pip>=26",
-    "regex>=2026"
+    "regex>=2026",
+    "python-dotenv>=1"
 ]
 
 [project.urls]
@@ -42,5 +43,6 @@ Issues = "https://github.com/Sp4ceH4ze/python_utils_collection/issues"
 [project.scripts]
 find_duplicates = "utils.file.find_duplicates:main"
 batch_rename = "utils.file.batch_rename:main"
+safe_delete = "utils.file.safe_delete:main"
 checksum = "utils.security.checksum:main"
 secret_scan = "utils.security.secret_scan:main"
