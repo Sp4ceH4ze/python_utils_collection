@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling >= 1.29"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["utils"]
+
+[project]
+name = "python_utils_collection"
+version = "0.1.0"
+authors = [
+    { name="sp4c3h4z3", email="spacehaze89@gmail.com" },
+]
+description = "A collection of utility scripts"
+requires-python = ">=3.14"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "click>=8",
+    "pip>=26",
+]
+
+[project.scripts]
+checksum = "utils.security.checksum:main"
