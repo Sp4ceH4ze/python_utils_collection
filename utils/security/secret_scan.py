@@ -2,6 +2,7 @@
 # Licensed under MIT License — see LICENSES/gitleaks-MIT.md
 
 import os
+import click
 import regex as re
 import tomllib
 
@@ -50,14 +51,12 @@ def scan(directory: str):
                             })
     return matches
 
-import click
-
 @click.command()
 @click.argument('directory', type=click.Path(exists=True))
 def main(directory: str):
     result = scan(directory)
     if not result:
-        click.echo(success("No secrets founds."))
+        click.echo(success("No secrets found."))
         return
     click.echo(header(f"Found {len(result)} secret(s):\n"))
     for item in result:

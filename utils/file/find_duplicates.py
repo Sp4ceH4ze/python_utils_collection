@@ -1,4 +1,5 @@
 import os
+import click
 
 from utils.common import success, warning, path, header
 from utils.security.checksum import hash_file, hash_compare
@@ -15,8 +16,6 @@ def find_duplicate(directory: str):
             else:
                 hash_list[hash] = [filepath]
     return {hash: paths for hash, paths in hash_list.items() if len(paths) > 1}
-
-import click
 
 @click.command()
 @click.argument('directory', type=click.Path(exists=True))

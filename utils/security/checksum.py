@@ -1,5 +1,6 @@
-import hashlib
 import os
+import click
+import hashlib
 
 from utils.common import success, error
 
@@ -24,8 +25,6 @@ def hash_directory(path: str, algorithm: str):
 
 def hash_compare(result: str, expected: str):
     return result == expected, result
-
-import click
 
 @click.group()
 def main():
