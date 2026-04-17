@@ -1,6 +1,7 @@
 import os
+import click
 
-from utils.common import success, warning, path
+from utils.common import success, warning, path, dry_run_option
 
 def batch_rename(directory: str, match: str, replace: str):
     matches = {}
@@ -25,10 +26,8 @@ def apply_renames(matches: dict, dry_run: bool = False):
             os.rename(src, dst)
             click.echo(success(f"Renamed: {src} → {dst}"))
 
-import click
-
 @click.command()
-@click.option('--dry-run', is_flag=True, help="Show what would be renamed without doing it.")
+@dry_run_option
 @click.argument('directory', type=click.Path(exists=True))
 @click.argument('match', type=click.STRING)
 @click.argument('replace', type=click.STRING)
