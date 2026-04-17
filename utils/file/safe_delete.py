@@ -1,9 +1,10 @@
 import os
+import click
 from pathlib import Path
 from datetime import datetime
 from dotenv import load_dotenv
 
-from utils.common import success, path
+from utils.common import success, path, dry_run_option
 
 load_dotenv()
 
@@ -16,10 +17,8 @@ def safe_delete(filepath: str):
     src.move(dst)
     return dst
 
-import click
-
 @click.command()
-@click.option('--dry-run', is_flag=True)
+@dry_run_option
 @click.argument('files', type=click.Path(exists=True), nargs=-1, required=True)
 def main(files, dry_run):
     for file in files:
