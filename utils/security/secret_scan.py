@@ -2,11 +2,12 @@
 # Licensed under MIT License — see LICENSES/gitleaks-MIT.md
 
 import os
-import click
-import regex as re
 import tomllib
 
-from utils.common import success, warning, header, path
+import click
+import regex as re
+
+from utils.common import header, path, success, warning
 
 GITLEAKS_TOML = os.path.join(os.path.dirname(__file__), "rules/gitleaks.toml")
 
@@ -22,37 +23,43 @@ for rule in rules:
     if "regex" not in rule:
         continue
     try:
-        compiled_rules.append({
-            "id": rule["id"],
-            "description": rule["description"],
-            "pattern": re.compile(rule["regex"])
-        })
+        compiled_rules.append(
+            {
+                "id": rule["id"],
+                "description": rule["description"],
+                "pattern": re.compile(rule["regex"]),
+            }
+        )
     except re.error:
         pass
+
 
 def scan(directory: str):
     matches = []
     for root, dirs, files in os.walk(directory):
         dirs.sort()
-        for file in sorted (files):
+        for file in sorted(files):
             filepath = os.path.join(root, file)
             if any(re.search(pattern, filepath) for pattern in ignored_paths):
                 continue
-            with open(filepath, 'r', errors="ignore") as f:
+            with open(filepath, "r", errors="ignore") as f:
                 for line_num, line in enumerate(f, start=1):
                     for rule in compiled_rules:
                         match = rule["pattern"].search(line)
                         if match:
-                            matches.append({
-                                "file": filepath,
-                                "line": line_num,
-                                "rule": rule["id"],
-                                "match": match.group()
-                            })
+                            matches.append(
+                                {
+                                    "file": filepath,
+                                    "line": line_num,
+                                    "rule": rule["id"],
+                                    "match": match.group(),
+                                }
+                            )
     return matches
 
+
 @click.command()
-@click.argument('directory', type=click.Path(exists=True))
+@click.argument("directory", type=click.Path(exists=True))
 def main(directory: str):
     result = scan(directory)
     if not result:
@@ -60,9 +67,14 @@ def main(directory: str):
         return
     click.echo(header(f"Found {len(result)} secret(s):\n"))
     for item in result:
-        click.echo(path(item['file']))
-        click.echo(warning(f"line: {item['line']}\nrule: {item['rule']}\nmatch: {item['match']}"))
+        click.echo(path(item["file"]))
+        click.echo(
+            warning(
+                f"line: {item['line']}\nrule: {item['rule']}\nmatch: {item['match']}"
+            )
+        )
         click.echo("")
+
 
 if __name__ == "__main__":
     main()

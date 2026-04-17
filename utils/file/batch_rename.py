@@ -1,7 +1,9 @@
 import os
+
 import click
 
-from utils.common import success, warning, path, dry_run_option
+from utils.common import dry_run_option, path, success, warning
+
 
 def batch_rename(directory: str, match: str, replace: str):
     matches = {}
@@ -18,6 +20,7 @@ def batch_rename(directory: str, match: str, replace: str):
             matches[filepath] = new_filepath
     return matches
 
+
 def apply_renames(matches: dict, dry_run: bool = False):
     for src, dst in matches.items():
         if dry_run:
@@ -26,18 +29,19 @@ def apply_renames(matches: dict, dry_run: bool = False):
             os.rename(src, dst)
             click.echo(success(f"Renamed: {src} → {dst}"))
 
+
 @click.command()
 @dry_run_option
-@click.argument('directory', type=click.Path(exists=True))
-@click.argument('match', type=click.STRING)
-@click.argument('replace', type=click.STRING)
+@click.argument("directory", type=click.Path(exists=True))
+@click.argument("match", type=click.STRING)
+@click.argument("replace", type=click.STRING)
 def main(directory: str, match: str, replace: str, dry_run: bool):
     matches = batch_rename(directory, match, replace)
     if not matches:
-        click.echo("No files matched.")
+        click.echo(success("No files matched."))
         return
     apply_renames(matches, dry_run=dry_run)
 
+
 if __name__ == "__main__":
     main()
-    
