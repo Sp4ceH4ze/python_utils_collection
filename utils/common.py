@@ -13,21 +13,21 @@ def dry_run_option(f):
     )(f)
 
 
-def success(text):
+def success(text: str):
     return click.style(text, fg="green")
 
 
-def error(text):
+def error(text: str):
     return click.style(text, fg="red")
 
 
-def warning(text):
+def warning(text: str):
     return click.style(text, fg="yellow")
 
 
-def path(text):
+def path(text: str):
     return click.style(text, fg="cyan")
 
 
-def header(text):
+def header(text: str):
     return click.style(text, fg="white", bold=True)
